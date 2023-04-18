@@ -6,7 +6,7 @@ dotenv.config();
 
 const app = express()
 
-const allowedOrigins = ['https://o18-test.live'];
+const allowedOrigins = [''];
 
 const corsOptions = {
   origin: function (origin, callback) {
