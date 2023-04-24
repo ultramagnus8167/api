@@ -25,7 +25,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
-  res.json({ message: "API for Chatbot" });
+  res.json({ message: "API for Chatbot Data Added" });
 });
 
 
