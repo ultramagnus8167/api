@@ -6,7 +6,7 @@ dotenv.config();
 
 const app = express()
 
-const allowedOrigins = [''];
+const allowedOrigins = [];
 
 const corsOptions = {
   origin: function (origin, callback) {
