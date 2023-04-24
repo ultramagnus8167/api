@@ -4,9 +4,13 @@ import { makeChain } from '../utils/makechain.js';
 import { pinecone } from '../utils/pinecone-client.js';
 import { PINECONE_INDEX_NAME, PINECONE_NAME_SPACE } from '../config/pinecone.js';
 import { LocalStorage } from 'node-localstorage';
+import Cache from 'node-cache';
 export default async function handler(req, res) {
 
-  global.localStorage = new LocalStorage('./data') 
+  const cache = new Cache({ stdTTL: 60 });
+
+  global.localStorage = new LocalStorage('./data', cache)
+
 
   const { question, history, VisiterId } = req.body;
 
@@ -15,7 +19,7 @@ export default async function handler(req, res) {
     if (!apiCallsStr) {
       return [];
     }
-  
+
     const apiCalls = JSON.parse(apiCallsStr);
     const now = Date.now();
     const hour = 60 * 60 * 1000; // 1 hour in milliseconds
@@ -23,17 +27,17 @@ export default async function handler(req, res) {
       localStorage.removeItem(`apiCalls:${userId}`);
       return [];
     }
-  
+
     return apiCalls.data;
   };
-  
+
   const addApiCall = (userId, apiCall) => {
     const apiCalls = getApiCalls(userId);
     const now = Date.now();
     apiCalls.push(apiCall);
     localStorage.setItem(`apiCalls:${userId}`, JSON.stringify({ data: apiCalls, timestamp: now }));
   };
-  
+
 
 
   const allapicalls = getApiCalls(VisiterId)
