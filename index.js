@@ -28,6 +28,10 @@ app.get("/", (req, res) => {
   res.send("API for Chatbot");
 });
 
+app.post("/", (req, res) => {
+  res.json({ "message": "API for Chatbot" });
+});
+
 
 app.use((req, res, next) => {
   const apiKey = req.header('api-key')
