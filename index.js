@@ -25,7 +25,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
-  res.json({ message: "API for O18 Chatbot" });
+  res.send("API for Chatbot");
 });
 
 
